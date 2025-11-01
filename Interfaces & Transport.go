@@ -8,7 +8,7 @@ import (
 
 // TODO: func (b *Car) Repair() {}
 
-func (c *Car) Drive(distance int) {
+func (c *transport) Drive(distance int) {
 	FuelFlow := distance * FuelPerKm
 
 	// Если нет топлива
