@@ -4,20 +4,6 @@ import (
 	"fmt"
 )
 
-type Transport interface {
-	Drive()
-	Stop()
-	WearVehicleLvl()
-	Repair()
-}
-
-// Все для Car
-type Car struct {
-	FuelLvl int
-}
-
-const FuelPerKm = 2
-
 // TODO:func (b *Car) WearVehicleLvl() {}
 
 // TODO: func (b *Car) Repair() {}
