@@ -2,10 +2,11 @@ package main
 
 import (
 	"Transport_rental/internal/genid"
-	"Transport_rental/internal/transport/entities"
 )
 
 func main() {
-	transportID := NewID("car", ShortIDGen{})
-	userID := NewID("user", UuidGen{})
+	genid.NewID("user", genid.UuidGen{})   // create user ID
+	genid.NewID("car", genid.ShortIDGen{}) // create transport ID
+
+	genid.ShowAllID()
 }
