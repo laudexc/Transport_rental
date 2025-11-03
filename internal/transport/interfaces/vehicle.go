@@ -5,3 +5,7 @@ type Transport interface {
 	LvlVehicleWear() // износ
 	Repair()         // ремонт
 }
+
+type CheckCondition interface {
+	// TODO:
+}

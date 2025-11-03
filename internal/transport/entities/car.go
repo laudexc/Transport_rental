@@ -1,31 +1,73 @@
 package transport
 
-// Car — структура автомобиля.
+import (
+	"fmt"
+	"strings"
+
+	"Transport_rental/internal/common"
+	"Transport_rental/internal/genid"
+	"Transport_rental/internal/tariffs"
+)
+
 type Car struct {
-	ID            string  // уникальный идентификатор (например, UUID)
-	Model         string  // марка и модель
-	FuelLvl       int     // уровень топлива (0–100)
-	DirtLvl       int     // загрязнение (0–100)
-	TotalDistance int     // пробег в км
-	Condition     int     // состояние (0–100, где 100 — идеал)
-	Rented        bool    // сейчас в аренде?
-	PricePerDay   float64 // цена за день аренды
-	LastServiceKm int     // пробег последнего ТО
+	ID            string
+	Model         string
+	Class         string
+	VehicleType   tariffs.VehicleType
+	FuelLvl       int
+	DirtLvl       int
+	Mileage       int
+	Condition     int
+	LastServiceKm int
+	Rented        bool
+	PricePerHour  float64
+	PricePerDay   float64
 }
 
-// // ElectricCar — структура электромобиля.
+// Constructor function for creating a car
+func NewCar(model, class string, vType tariffs.VehicleType, rentedCount, totalCount int) (*Car, error) {
+	if strings.TrimSpace(model) == "" || strings.TrimSpace(class) == "" {
+		return nil, fmt.Errorf("invalid car parameters: %s", common.EmptyIdOrModel)
+	}
+
+	id := genid.NewID("Car", genid.ShortIDGen{})
+	fuellvl, dirtlvl, mileage, cond, lastServ, rented := genid.NewParams()
+
+	priceH, priceD := tariffs.CalculatePrice(vType, rentedCount, totalCount)
+	return &Car{
+		ID:            id,
+		Model:         model,
+		Class:         class,
+		VehicleType:   vType,
+		FuelLvl:       fuellvl,
+		DirtLvl:       dirtlvl,
+		Mileage:       mileage,
+		Condition:     cond,
+		LastServiceKm: lastServ,
+		Rented:        rented,
+		PricePerHour:  priceH,
+		PricePerDay:   priceD,
+	}, nil
+}
+
+// Методы состояния
+
+// Минимум:
+
+// Rent() — арендовать транспорт (меняет флаг IsRented = true);
+
+// Return() — вернуть;
+
+// IsAvailable() — возвращает bool, свободен ли транспорт;
+
+// Info() или String() — для удобного вывода информации.
+
 // type ElectricCar struct {
 // 	Car                 // встраиваем обычный Car
 // 	BatteryCapacity int // ёмкость батареи (в кВт·ч)
 // 	ChargeLevel     int // уровень заряда (0–100)
 // 	ChargingTime    int // время до полного заряда (в минутах)
 // }
-
-// Функция конструктор для создания машины
-func NewCar() (*Car, error) {
-
-	return nil, nil
-}
 
 // func NewECar() (*ElecticCar, error) {
 

@@ -39,7 +39,7 @@ func (sig ShortIDGen) generate() (string, error) {
 
 }
 
-// функция для работы со всеми генераторами
+// function for working with all generators; for it to work, you need to pass the name for the object that is used and what ID needs to be generated
 func NewID(entityType string, gen Generator) string {
 	id, err := gen.generate()
 	if err != nil {

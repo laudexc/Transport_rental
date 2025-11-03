@@ -5,6 +5,11 @@ import (
 	"log"
 )
 
+const (
+	EmptyIdOrModel = "the passed identifier or model cannot be empty"
+	// ZeroVehicleParameters = "vehicle parameters must be greater than zero"
+)
+
 var Logs = make(map[string]string)
 
 func LogError(source string, err error) {
