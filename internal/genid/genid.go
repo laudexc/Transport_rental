@@ -1,6 +1,7 @@
 package genid
 
 import (
+	"Transport_rental/internal/common"
 	"fmt"
 	"log"
 	"math/rand/v2"
@@ -12,10 +13,7 @@ type Generator interface {
 	generate() (string, error)
 }
 
-var (
-	ID   = make(map[string]string)
-	Logs = make(map[string]string)
-)
+var ID = make(map[string]string)
 
 type UuidGen struct{}
 
@@ -45,14 +43,12 @@ func (sig ShortIDGen) generate() (string, error) {
 func NewID(entityType string, gen Generator) string {
 	id, err := gen.generate()
 	if err != nil {
-		log.Printf("[genid] Error in generating ID for %s: %v\n", entityType, err)
-		Logs[entityType] = fmt.Sprintf("ERROR: %v", err)
+		common.LogError("genid", err)
 		return ""
 	}
 
-	log.Printf("[genid] ID for %s successfully created: %s\n", entityType, id)
 	ID[entityType] = id
-	Logs[id] = "OK"
+	log.Printf("[genid] ID for %s successfully created: %s\n", entityType, id)
 	return id
 }
 
@@ -63,12 +59,7 @@ func ShowAllID() {
 		fmt.Printf("%d. Entity Type: %s, ID: %s\n", num, entityType, id)
 		num += 1
 	}
+	fmt.Println("***---***")
 
-	fmt.Printf("***---***\nAll logs for ID:\n")
-	num = 1
-	for id, err := range Logs {
-		fmt.Printf("%d. IDs: %s, Error: %s\n", num, id, err)
-		num += 1
-	}
-	fmt.Println()
+	// To check error logs, see common/errors ShowLogsErr()
 }

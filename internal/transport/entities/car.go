@@ -26,3 +26,7 @@ func NewCar() (*Car, error) {
 
 	return nil, nil
 }
+
+// func NewECar() (*ElecticCar, error) {
+
+// }
