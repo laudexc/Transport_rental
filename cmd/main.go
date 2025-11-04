@@ -35,5 +35,6 @@ func main() {
 	fmt.Printf("Тип: %s\n", car.VehicleType)
 	fmt.Printf("Цена за час: %.2f ₽\n", car.PricePerHour)
 	fmt.Printf("Цена за день: %.2f ₽\n", car.PricePerDay)
+	fmt.Printf("Цена за день: %.2f ₽\n", car.PricePerDay)
 	fmt.Printf("Топливо: %d%%, Состояние: %d%%\n", car.FuelLvl, car.Condition)
 }
